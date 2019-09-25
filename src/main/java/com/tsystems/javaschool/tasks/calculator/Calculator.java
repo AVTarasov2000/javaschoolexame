@@ -1,5 +1,11 @@
 package com.tsystems.javaschool.tasks.calculator;
 
+
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Calculator {
 
     /**
@@ -13,14 +19,15 @@ public class Calculator {
     public String evaluate(String statement) {
         // TODO: Implement the logic here
 
-
-
-
-
-
-
-
-        return "";
+        return CalculatorUtils.evaluate(statement);
     }
+
+
+
+
+
+
+
+
 
 }

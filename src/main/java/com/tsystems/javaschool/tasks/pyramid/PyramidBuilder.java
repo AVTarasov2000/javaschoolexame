@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.tasks.pyramid;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class PyramidBuilder {
@@ -14,8 +15,48 @@ public class PyramidBuilder {
      */
     public int[][] buildPyramid(List<Integer> inputNumbers) {
         // TODO : Implement your solution here
-        return new int[0][0];
+        int rows = Rows(inputNumbers.size());
+
+        if (inputNumbers.contains(null)) {
+            throw new CannotBuildPyramidException();
+        }
+
+        int columns = Columns(rows);
+        int[][] res = new int[rows][columns];
+
+        inputNumbers.sort(Integer::compareTo);
+
+
+        int index=0;
+
+        for (int i = 0; i < rows; i++) {
+            int row = i + 1;
+            int padding = Padding(columns, row);
+            for (int count = 0; count < row; count++) {
+                res[i][padding] = inputNumbers.get(index);
+                index++;
+                padding += 2;
+            }
+        }
+        return res;
     }
+
+
+
+    private int Rows(int count) {
+        double d = Math.sqrt(8 * count + 1);
+        if (d != (int) d) { throw new CannotBuildPyramidException();}
+        return ((int) d - 1) / 2;
+    }
+
+    private int Columns(int rowsCount) {
+        return 2 * rowsCount - 1;
+    }
+
+    private int Padding(int columnsCount, int rowNumber) {
+        return (columnsCount - (2 * rowNumber - 1)) / 2;
+    }
+
 
 
 }
